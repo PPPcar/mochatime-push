@@ -1,4 +1,3 @@
-from datetime import datetime, timezone, timedelta
 import random
 from time import time, localtime
 import cityinfo
@@ -207,11 +206,9 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
     week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
     year = localtime().tm_year
     month = localtime().tm_mon
-    tz = timezone(timedelta(hours=8))
-    now = datetime.now(tz)
-    today = now.strftime("%Y-%m-%d")  # 格式：2023-10-05
-    week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
-    week = week_list[now.isoweekday() % 7]  # 正确计算星期
+    day = localtime().tm_mday
+    today = datetime.date(datetime(year=year, month=month, day=day))
+    week = week_list[today.isoweekday() % 7]
     # 获取在一起的日子的日期格式
     love_year = int(config["love_date"].split("-")[0])
     love_month = int(config["love_date"].split("-")[1])
