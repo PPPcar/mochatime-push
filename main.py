@@ -11,8 +11,10 @@ from zhdate import ZhDate
 global false, null, true
 false = null = true = ''
 def get_color():
-    # 生成大写 + 固定 # 前缀
-    return "#%06X" % random.randint(0, 0xFFFFFF)
+    # 获取随机颜色
+    get_colors = lambda n: list(map(lambda i: "#" + "%06x" % random.randint(0, 0xFFFFFF), range(n)))
+    color_list = get_colors(100)
+    return random.choice(color_list)
 
 
 def get_access_token():
@@ -228,7 +230,7 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
         "topcolor": "#FF0000",
         "data": {
             "date": {
-                "value": f"{today} {week}",  # 值示例：2023-10-05 星期四
+                "value": "{} {}".format(today, week),
                 "color": get_color()
             },
             "city": {
